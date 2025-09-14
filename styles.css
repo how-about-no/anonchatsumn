@@ -40,19 +40,21 @@
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: var(--bg-primary);
-    min-height: 100vh;
+    height: 100vh;
     color: var(--text-primary);
     line-height: 1.5;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 .container {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     background: var(--bg-secondary);
+    overflow: hidden;
 }
 
 /* Desktop: Center the chat like a phone app */
@@ -60,10 +62,11 @@ body {
     .container {
         width: 33.33%;
         margin: 0 auto;
-        min-height: 100vh;
+        height: 100vh;
         box-shadow: 0 0 50px var(--shadow-green);
         border-left: 2px solid var(--border-primary);
         border-right: 2px solid var(--border-primary);
+        overflow: hidden; /* Prevent container from scrolling */
     }
 }
 
@@ -76,9 +79,6 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid var(--border-primary);
-    position: sticky;
-    top: 0;
-    z-index: 100;
 }
 
 .logo {
@@ -121,7 +121,13 @@ body {
     display: flex;
     flex-direction: column;
     background: var(--bg-secondary);
-    min-height: calc(100vh - 140px);
+    overflow-y: hidden;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.main-content::-webkit-scrollbar {
+    display: none; /* WebKit browsers */
 }
 
 .chat-container {
@@ -136,9 +142,10 @@ body {
 .messages {
     flex: 1;
     padding: 1rem;
-    overflow-y: auto;
     background: var(--bg-secondary);
-    min-height: calc(100vh - 200px);
+    overflow-y: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
 }
 
 .welcome-message {
@@ -232,6 +239,8 @@ body {
     border-top: 2px solid var(--border-primary);
     position: sticky;
     bottom: 0;
+    z-index: 100;
+    flex-shrink: 0;
 }
 
 .input-wrapper {
@@ -472,10 +481,17 @@ body {
     .status-indicator {
         font-size: 0.7rem;
     }
+
+    .status-outside {
+        right: 10px;
+        top: 10px;
+        font-size: 0.7rem;
+        padding: 0.4rem 0.8rem;
+    }
     
     .messages {
         padding: 0.8rem;
-        min-height: calc(100vh - 180px);
+        height: 100%;
     }
     
     .welcome-message {
@@ -654,6 +670,7 @@ body {
 /* Scrollbar styling */
 .messages::-webkit-scrollbar {
     width: 8px;
+    display: none; 
 }
 
 .messages::-webkit-scrollbar-track {
@@ -667,4 +684,23 @@ body {
 
 .messages::-webkit-scrollbar-thumb:hover {
     background: var(--accent-primary);
+}
+
+.status-outside {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--bg-tertiary);
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--border-primary);
+    border-radius: 6px;
+    z-index: 1000;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+@media (min-width: 769px) {
+    .status-outside {
+        right: calc((100vw - 33.33%) / 2 - 200px); 
+    }
 }
