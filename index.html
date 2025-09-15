@@ -18,34 +18,36 @@
     <div class="container">
         <main class="main-content">
             <div class="chat-container">
-                <header class="header">
-                    <h1 class="logo">LaroChat</h1>
-                </header>
-                <div class="messages" id="messages">
-                    
-                    <div class="welcome-message">
-                        <h2>Welcome to LaroChat!</h2>
-                        <p>Open this page in another tab to start chatting anonymously.</p>
+                <div class="scrollable-content">
+                    <header class="header">
+                        <h1 class="logo">LaroChat</h1>
+                    </header>
+                    <div class="messages" id="messages">
+                        
+                        <div class="welcome-message">
+                            <h2>Welcome to LaroChat!</h2>
+                            <p>Open this page in another tab to start chatting anonymously.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="game-area" id="gameArea">
-                    <div class="game-header">
-                        <div class="game-title">Tic-Tac-Toe</div>
-                        <div class="game-status" id="gameStatus">Invite someone to play</div>
-                    </div>
-                    <div class="game-board" id="gameBoard">
-                        <button class="cell" data-index="0"></button>
-                        <button class="cell" data-index="1"></button>
-                        <button class="cell" data-index="2"></button>
-                        <button class="cell" data-index="3"></button>
-                        <button class="cell" data-index="4"></button>
-                        <button class="cell" data-index="5"></button>
-                        <button class="cell" data-index="6"></button>
-                        <button class="cell" data-index="7"></button>
-                        <button class="cell" data-index="8"></button>
-                    </div>
-                    <div class="game-actions">
-                        <button class="btn-inline danger" id="endGame">End game</button>
+                    <div class="game-area" id="gameArea">
+                        <div class="game-header">
+                            <div class="game-title">Tic-Tac-Toe</div>
+                            <div class="game-status" id="gameStatus">Invite someone to play</div>
+                        </div>
+                        <div class="game-board" id="gameBoard">
+                            <button class="cell" data-index="0"></button>
+                            <button class="cell" data-index="1"></button>
+                            <button class="cell" data-index="2"></button>
+                            <button class="cell" data-index="3"></button>
+                            <button class="cell" data-index="4"></button>
+                            <button class="cell" data-index="5"></button>
+                            <button class="cell" data-index="6"></button>
+                            <button class="cell" data-index="7"></button>
+                            <button class="cell" data-index="8"></button>
+                        </div>
+                        <div class="game-actions">
+                            <button class="btn-inline danger" id="endGame">End game</button>
+                        </div>
                     </div>
                 </div>
                 
@@ -106,5 +108,6 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="tictactoe.js"></script>
 </body>
 </html>

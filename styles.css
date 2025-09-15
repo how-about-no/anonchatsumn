@@ -181,18 +181,23 @@ body {
     display: flex;
     flex-direction: column;
     background: var(--bg-secondary);
+    overflow: hidden; /* Prevent container from scrolling */
+}
+
+/* Scrollable content area */
+.scrollable-content {
+    flex: 1;
     overflow-y: auto;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE 10+ */
 }
 
-.chat-container::-webkit-scrollbar {
+.scrollable-content::-webkit-scrollbar {
     display: none; /* WebKit */
 }
 
 /* Messages */
 .messages {
-    flex: 1;
     padding: 1rem;
     background: var(--bg-secondary);
 }
@@ -286,10 +291,8 @@ body {
     padding: 1rem;
     background: var(--bg-tertiary);
     border-top: 2px solid var(--border-primary);
-    position: sticky;
-    bottom: 0;
-    z-index: 100;
     flex-shrink: 0;
+    z-index: 100;
 }
 
 /* Game area */
@@ -299,6 +302,24 @@ body {
     border-bottom: 2px solid var(--border-primary);
     padding: 0.8rem 1rem;
     display: none;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.game-area.open {
+    display: block;
+    max-height: 520px; /* enough to show header + board + actions */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.game-area.closing {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(8px);
 }
 
 .game-header {
@@ -339,6 +360,13 @@ body {
     border: 2px solid var(--border-secondary);
     color: var(--text-primary);
     cursor: pointer;
+}
+
+.cell.win {
+    background: var(--accent-light);
+    color: #142814;
+    border-color: var(--border-primary);
+    box-shadow: 0 0 18px var(--shadow-green);
 }
 
 .cell:disabled {
@@ -633,8 +661,7 @@ body {
     
     .messages {
         padding: 0.8rem;
-        height: 100%;
-        padding-bottom: 5.5rem; /* ensure last messages aren't hidden behind input */
+        padding-bottom: 1rem; /* Small padding at bottom for last messages */
     }
     
     .welcome-message {
@@ -721,7 +748,9 @@ body {
 
     /* Use dynamic viewport height so the input isn't pushed off-screen on mobile */
     body, .container { height: 100dvh; }
-    .input-container { bottom: env(safe-area-inset-bottom, 0); }
+    .input-container { 
+        padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0)); 
+    }
 }
 
 /* Desktop optimizations */
