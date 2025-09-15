@@ -634,6 +634,7 @@ body {
     .messages {
         padding: 0.8rem;
         height: 100%;
+        padding-bottom: 5.5rem; /* ensure last messages aren't hidden behind input */
     }
     
     .welcome-message {
@@ -713,6 +714,14 @@ body {
         padding: 0.6rem 1.2rem;
         font-size: 0.8rem;
     }
+
+    /* Hide status bar and change-name on small screens */
+    .status-outside { display: none; }
+    #changeName { display: none; }
+
+    /* Use dynamic viewport height so the input isn't pushed off-screen on mobile */
+    body, .container { height: 100dvh; }
+    .input-container { bottom: env(safe-area-inset-bottom, 0); }
 }
 
 /* Desktop optimizations */
